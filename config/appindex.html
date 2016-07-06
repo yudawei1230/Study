@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>盒子支付大数据</title>
+    <link rel="stylesheet" type="text/css" href="css/heard_bottom.css"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <script type="text/javascript" src='js/swiper.min.js'></script>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/UtilTool.js"></script>
+</head>
+<body ng-app="app_index">
+
+<!--头部-->
+<div class="hear">
+    <div class="hear_top"></div>
+    <div class="hear_nav">
+        <div class="hear_navlist">
+
+            <div class="hear_logo"><img src="images/ibox_logo.png"/></div>
+            <ul>
+                <li class=""><a href="index.html">钱包配置</a></li>
+                <li class="qianhe_cur"><a href="appindex.html">钱包首页配置</a></li>
+            </ul>
+            <div class="clear"></div>
+            <div class="nav_right">perAdmin[权限系统管理角色] <span class="fenxian">|</span> <a href="#">[退出]</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="main" ng-controller="appindexController">
+    <div class="main_right">
+        <div id="main_content">
+            <div class="appindex">
+                <div class="appcontaner">
+                    <div class="areas index0" style='order:{{page.pages[0].areas[0].index}};position:relative' ondragover="allowDrop(event)" ondrop="drop(event,0,false)" ng-click='show("banner")'>
+                        <input type="button" value='初始化' ng-click='initBanner($event)' style='position:absolute;top:0;right:0;z-index:10'>
+                        <div class="area_type1_part  swiper-container">
+                            <ul class='swiper-wrapper'>
+                            </ul>
+                            <div class="pagination"></div>
+                        </div>
+                    </div>
+                    <div class="areas index1" style='order:{{page.pages[0].areas[1].index}}'>
+                        <div class="area_type2_part">
+                            <ul>                        
+                                <area1 ng-repeat='item in page.pages[0].areas[1].blocks' block='item' area='page.pages[0].areas[1]' choice='choice' ondragover="allowDrop(event)" index= 'false' show='show'></area1>
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="areas index2" style='order:{{page.pages[0].areas[2].index}}'>
+
+                        <div class="area_type3_part">
+                            <ul>
+                                <li class="first_li" ondrop="drop(event,{{page.pages[0].areas[2].type}},{{page.pages[0].areas[2].blocks[0].id}},false)" ondragover="allowDrop(event)">
+                                    <p><img ng-src="{{page.pages[0].areas[2].blocks[0].icon}}"></p>
+
+                                    <p ng-bind='page.pages[0].areas[2].blocks[0].text[0]' content></p>
+
+                                    <p ng-bind='page.pages[0].areas[2].blocks[0].text[1]'></p>
+                                </li>
+                                <li class="secli">
+                                    <div class="first_li" ondrop="drop(event,{{page.pages[0].areas[2].type}},{{page.pages[0].areas[2].blocks[1].id}},false)" ondragover="allowDrop(event)">
+                                        <div class="type3_icon"><p><img ng-src="{{page.pages[0].areas[2].blocks[1].icon}}"></p></div>
+                                        <div class="type3_det">
+                                            <p ng-bind='page.pages[0].areas[2].blocks[1].text[0]'></p>
+
+                                            <p ng-bind='page.pages[0].areas[2].blocks[1].text[1]'></p>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="first_li first_li2" ondrop="drop(event,{{page.pages[0].areas[2].type}},{{page.pages[0].areas[2].blocks[2].id}},false)" ondragover="allowDrop(event)">
+                                        <div class="type3_icon">
+                                            <p><img ng-src="{{page.pages[0].areas[2].blocks[2].icon}}"></p>
+                                        </div>
+                                        <div class="type3_det">
+                                            <p ng-bind='page.pages[0].areas[2].blocks[2].text[0]'></p>
+
+                                            <p ng-bind='page.pages[0].areas[2].blocks[2].text[1]'></p>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                </li>
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="areas index3" style='order:{{page.pages[0].areas[3].index}}'ng-repeat='blocks in page.pages[0].areas[3].blocks'>
+                        <div class="area_type4_part">
+                            <ul>                        
+                                <area1 ng-repeat='item in blocks.block' block='item' area='page.pages[0].areas[3]' choice='choice' ondragover="allowDrop(event)" index='blocks.col' show='show'></area1>
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="menu">
+                        <ul>
+                            <li ng-repeat='item in page.pages[0].menu'>
+                                <img ng-src="{{item.icon}}">
+                                <p ng-bind='item.title'></p>
+                            </li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cofig" >
+                    <input type="text" placeholder='主题名字' ng-model='page.name'>
+                    <div>
+                        <p ng-bind='page.pages[0].areas[1].text'></p>
+                        <input type="text" placeholder='{{page.pages[0].areas[1].text}}' ng-model='page.pages[0].areas[1].index'>
+                        <input type="button" value='add' ng-click='add(page.pages[0].areas[1].type)'>
+                        <input type="button" value='delete' ng-click='delete(page.pages[0][1][1].areas.type)'>
+                    </div>
+                    <div ng-repeat='item in page.pages[0].areas[3].blocks'>
+                        <input type="button" value='增加第{{item.col}}行三级服务' ng-click='addThreeItem(item.col)'>
+                        <input type="button" value='减少第{{item.col}}行三级服务' ng-click='deleteThreeItem(item.col)'>
+                    </div>
+                    <input type="button" value='增加三级服务' ng-click='addThree()'>
+                    <input type="button" value='减少三级服务' ng-click='deleteThree()'>
+                    <input type="button" value='submit' ng-click='submit()'>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div ng-repeat='pic in pics' ng-click='choose(pic)'  ondragstart="drag(event,{{pic}})"  draggable="true" ng-show='select.area1'>
+            <img ng-src="{{pic.icon}}" alt="">
+            <p ng-bind="{{pic.text}}"></p>
+        </div>
+    </div>
+    <div class='banner_select' ng-show='select.banner'>
+        <div ng-repeat='banner in banners' class='banners' ondragstart="drag(event,{{banner}})">   
+            <img ng-src="{{banner.icon}}" class='banner'>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script type="text/javascript" src="js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="controller/index.js"></script>
+<script type="text/javascript" src='directive/menu.js'></script>
+<script type="text/javascript" src="factory/appIndexFactory.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+  
+  
+
+
